@@ -41,6 +41,3 @@ Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to se
   #### Ubuntu/Debian
 
 - `apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev`
-
-### 🧮 Design
-- TODO
