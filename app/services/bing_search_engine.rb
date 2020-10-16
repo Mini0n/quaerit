@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class BingSearch
+class BingSearchEngine < SearchEngine
   include HTTParty
 
   ENGINE_NAME = 'Bing'

@@ -3,8 +3,8 @@
 class Search
   DEFAULT_ENGINE = 1 # google
   ENGINES = { # new engines can be easily added here
-    1 => GoogleSearch,
-    2 => BingSearch
+    1 => GoogleSearchEngine,
+    2 => BingSearchEngine
   }.freeze
 
   attr_accessor :engines, :query, :offset # our class attributes

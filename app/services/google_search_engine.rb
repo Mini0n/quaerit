@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-class GoogleSearch
+class GoogleSearchEngine < SearchEngine
+  # include SearchEngine
   include HTTParty
 
   ENGINE_NAME = 'Google'
