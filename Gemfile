@@ -30,7 +30,6 @@ group :development, :test do
 
   # Testing gems
   gem 'rspec-rails'
-  gem 'faker'
 end
 
 group :development do
