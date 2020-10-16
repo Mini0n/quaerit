@@ -44,3 +44,20 @@ https://www.bing.com/search?q=kabuto+pokemon
 - https://www.bing.com/search?q=pokemon%20kabuto&first=0
 - https://www.bing.com/search?q=pokemon%20kabuto&first=10
 - https://www.bing.com/search?q=pokemon%20kabuto&first=20
+
+
+=== Rails config
+
+rails new quaerit
+--api
+--skip-action-mailer
+--skip-action-mailbox
+--skip-active-record
+--skip-active-storage
+--skip-action-cable
+--skip-action-text
+--skip-sprockets
+--skip-test
+
+-> RUN
+rails new . --api --skip-action-mailer --skip-action-mailbox --skip-active-record --skip-active-storage --skip-action-cable --skip-action-text --skip-sprockets --skip-test
