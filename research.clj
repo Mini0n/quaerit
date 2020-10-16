@@ -67,4 +67,4 @@ rails new . --api --skip-action-mailer --skip-action-mailbox --skip-active-recor
 - engine: engine[]=1, engine[]=2, engine[]=1,2 | 1=google, 2=bing
 
 
-rails g scaffold Search engine:integer query:string offeset:integer --skip-template-engine
+rails g scaffold Search engine:integer query:string offset:integer --skip-template-engine

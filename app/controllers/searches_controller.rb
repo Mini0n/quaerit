@@ -46,6 +46,6 @@ class SearchesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def search_params
-      params.require(:search).permit(:engine, :query, :offeset)
+      params.require(:search).permit(:engine, :query, :offset)
     end
 end
