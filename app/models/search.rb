@@ -16,16 +16,14 @@ class Search
   end
 
   def search
-    puts "Searching with:\n #{inspect}"
-    puts '-- Searching'
-
     return params_error unless valid_search? # check search will be valid
 
     params = { query: @query, offset: @offset }
     results = []
 
     @engines.each do |engine|
-      results << (ENGINES.key?(engine) ? search_with_engine(engine, params) : engine_error(engine))
+      results << (ENGINES.key?(engine) ?
+                  engine_results(engine, search_with_engine(engine, params)) : engine_error(engine))
     end
 
     {
