@@ -5,11 +5,13 @@
 # === === === === === === === === === === === === === === === === === === ===
 
 class SearchEngine
+  include HTTParty
+
   def search
     { "error": 'Engine search not implemented' }
   end
 
   def self.name
-    'ISearchEngine'
+    'SearchEngine'
   end
 end

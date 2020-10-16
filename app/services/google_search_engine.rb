@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
 class GoogleSearchEngine < SearchEngine
-  # include SearchEngine
-  include HTTParty
-
   ENGINE_NAME = 'Google'
   BASE_URL = 'https://www.google.com/search?'
 
