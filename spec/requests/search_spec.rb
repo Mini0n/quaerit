@@ -18,112 +18,43 @@ RSpec.describe '/search', type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Search. As you add validations to Search, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) do
-    skip('Add a hash of attributes valid for your model')
+  let(:valid_params) do
+    '?query=kabuto&offset=10&engines=1,2'
   end
 
-  let(:invalid_attributes) do
-    skip('Add a hash of attributes invalid for your model')
-  end
-
-  # This should return the minimal set of values that should be in the headers
-  # in order to pass any filters (e.g. authentication) defined in
-  # searchController, or in your router and rack
-  # middleware. Be sure to keep this updated too.
-  let(:valid_headers) do
-    {}
+  let(:invalid_params) do
+    '?query=&engines=1,2'
   end
 
   describe 'GET /search' do
     it 'renders a successful response' do
-      Search.create! valid_attributes
-      get search_url, headers: valid_headers, as: :json
+      get search_url + valid_params, as: :json
+
+      results = JSON.parse(response.body)['results']
+
       expect(response).to be_successful
+      expect(results.size).to be 2
+      expect(results[0]['results'].size).to be 10
+      expect(results[1]['results'].size).to be 10
+    end
+
+    it 'renders an successful response' do
+      get search_url + invalid_params, as: :json
+
+      results = JSON.parse(response.body)
+
+      expect(response).to be_successful
+      expect(results.size).to be 1
+      expect(results.keys.first).to be 'error'
     end
   end
 
-  describe 'GET /about' do
+  describe 'GET /' do
     it 'renders a successful response' do
-      # search = Search.create! valid_attributes
-      # get search_url(search), as: :json
-      # expect(response).to be_successful
+      get '/', as: :json
+
+      expect(response).to be_successful
+      expect(response.body).to include('http://github.com/Mini0n/quaerit')
     end
   end
-
-  # describe "POST /create" do
-  #   context "with valid parameters" do
-  #     it "creates a new Search" do
-  #       expect {
-  #         post search_url,
-  #              params: { search: valid_attributes }, headers: valid_headers, as: :json
-  #       }.to change(Search, :count).by(1)
-  #     end
-
-  #     it "renders a JSON response with the new search" do
-  #       post search_url,
-  #            params: { search: valid_attributes }, headers: valid_headers, as: :json
-  #       expect(response).to have_http_status(:created)
-  #       expect(response.content_type).to match(a_string_including("application/json"))
-  #     end
-  #   end
-
-  #   context "with invalid parameters" do
-  #     it "does not create a new Search" do
-  #       expect {
-  #         post search_url,
-  #              params: { search: invalid_attributes }, as: :json
-  #       }.to change(Search, :count).by(0)
-  #     end
-
-  #     it "renders a JSON response with errors for the new search" do
-  #       post search_url,
-  #            params: { search: invalid_attributes }, headers: valid_headers, as: :json
-  #       expect(response).to have_http_status(:unprocessable_entity)
-  #       expect(response.content_type).to eq("application/json")
-  #     end
-  #   end
-  # end
-
-  # describe "PATCH /update" do
-  #   context "with valid parameters" do
-  #     let(:new_attributes) {
-  #       skip("Add a hash of attributes valid for your model")
-  #     }
-
-  #     it "updates the requested search" do
-  #       search = Search.create! valid_attributes
-  #       patch search_url(search),
-  #             params: { search: invalid_attributes }, headers: valid_headers, as: :json
-  #       search.reload
-  #       skip("Add assertions for updated state")
-  #     end
-
-  #     it "renders a JSON response with the search" do
-  #       search = Search.create! valid_attributes
-  #       patch search_url(search),
-  #             params: { search: invalid_attributes }, headers: valid_headers, as: :json
-  #       expect(response).to have_http_status(:ok)
-  #       expect(response.content_type).to eq("application/json")
-  #     end
-  #   end
-
-  #   context "with invalid parameters" do
-  #     it "renders a JSON response with errors for the search" do
-  #       search = Search.create! valid_attributes
-  #       patch search_url(search),
-  #             params: { search: invalid_attributes }, headers: valid_headers, as: :json
-  #       expect(response).to have_http_status(:unprocessable_entity)
-  #       expect(response.content_type).to eq("application/json")
-  #     end
-  #   end
-  # end
-
-  # describe "DELETE /destroy" do
-  #   it "destroys the requested search" do
-  #     search = Search.create! valid_attributes
-  #     expect {
-  #       delete search_url(search), headers: valid_headers, as: :json
-  #     }.to change(Search, :count).by(-1)
-  #   end
-  # end
 end
