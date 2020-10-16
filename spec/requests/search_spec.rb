@@ -12,7 +12,7 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/searches", type: :request do
+RSpec.describe "/search", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Search. As you add validations to Search, be sure to
   # adjust the attributes here as well.
@@ -26,7 +26,7 @@ RSpec.describe "/searches", type: :request do
 
   # This should return the minimal set of values that should be in the headers
   # in order to pass any filters (e.g. authentication) defined in
-  # SearchesController, or in your router and rack
+  # searchController, or in your router and rack
   # middleware. Be sure to keep this updated too.
   let(:valid_headers) {
     {}
@@ -35,7 +35,7 @@ RSpec.describe "/searches", type: :request do
   describe "GET /index" do
     it "renders a successful response" do
       Search.create! valid_attributes
-      get searches_url, headers: valid_headers, as: :json
+      get search_url, headers: valid_headers, as: :json
       expect(response).to be_successful
     end
   end
@@ -52,13 +52,13 @@ RSpec.describe "/searches", type: :request do
     context "with valid parameters" do
       it "creates a new Search" do
         expect {
-          post searches_url,
+          post search_url,
                params: { search: valid_attributes }, headers: valid_headers, as: :json
         }.to change(Search, :count).by(1)
       end
 
       it "renders a JSON response with the new search" do
-        post searches_url,
+        post search_url,
              params: { search: valid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:created)
         expect(response.content_type).to match(a_string_including("application/json"))
@@ -68,13 +68,13 @@ RSpec.describe "/searches", type: :request do
     context "with invalid parameters" do
       it "does not create a new Search" do
         expect {
-          post searches_url,
+          post search_url,
                params: { search: invalid_attributes }, as: :json
         }.to change(Search, :count).by(0)
       end
 
       it "renders a JSON response with errors for the new search" do
-        post searches_url,
+        post search_url,
              params: { search: invalid_attributes }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq("application/json")

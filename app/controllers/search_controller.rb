@@ -1,4 +1,4 @@
-class SearchesController < ApplicationController
+class SearchController < ApplicationController
   before_action :set_search, only: [:search]
 
   def search
