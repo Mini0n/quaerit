@@ -11,7 +11,9 @@ class SearchController < ApplicationController
     puts '-' * 43
     #
 
-    render json: { 'ola': 'k ase?' }
+    results = @search.search
+
+    render json: results
   end
 
   def about
