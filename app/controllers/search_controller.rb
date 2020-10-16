@@ -27,7 +27,7 @@ class SearchController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   # get the Search singleton instance and set its attributes from search_params
   def set_search
-    @search = Search.instance
+    @search = Search.new
     search_params.to_h.each { |param, value| @search.send("#{param}=", value) }
   end
 
