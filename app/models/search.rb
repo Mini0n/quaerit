@@ -11,7 +11,7 @@ class Search
 
   def initialize(engines = [DEFAULT_ENGINE], query = '', offset = 0)
     @engines = engines
-    @query = URI.encode(query)
+    @query = query
     @offset = offset
   end
 
@@ -40,15 +40,17 @@ class Search
     engine.search
   end
 
-  def search_bing(_params)
-    engine_results(2,
-                   [{ "title": 'cosa', "url": 'algo', "summary": 'stuff stuff' }])
-  end
+  # === SETTERS === === === === === === === === === === === === === === === ===
 
   # parse engines
   def engines=(engines)
     @engines = engines.scan(/\d+/).map(&:to_i)
     @engines = [DEFAULT_ENGINE] if @engines.empty? # use default engine if none
+  end
+
+  # parse query
+  def query=(query)
+    @query = URI.encode(query)
   end
 
   # parse offset
