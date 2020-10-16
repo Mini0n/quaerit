@@ -28,19 +28,23 @@ class BingSearchEngine < SearchEngine
   def parse_body(html_res)
     results = html_res.search('#b_results').first.children[0, 10] # 10 results
 
-    results.map { |result| parse_result(result) }
+    results.each.with_object([]) do |result, array|
+      parsed = parse_result(result)
+      array << parsed unless parsed.empty?
+    end
   end
 
   def parse_result(result)
+    decoded = result.children.last.children.first.text
+
+    return {} unless valid_url?(decoded)
+
     {
       title: result.children.first.text,
-      link: result.children.last.children.first.text,
+      link: decoded,
       summary: result.children.last.children.last.text
     }
-  end
-
-  def search_error(error)
-    { 'error': 'An error ocurred through the search process',
-      'details': error }
+  rescue StandardError
+    {}
   end
 end
