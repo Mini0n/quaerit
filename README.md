@@ -4,8 +4,6 @@ Search Google ||(&amp;&amp;) Bing: Get results in json format
 ### 📍 Description
 Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to search through Google and Bing (currently<sup>1</sup>) and retrieve the results in JSON.
 
-#### How-To
-
 - Quaerit search endpoint is `/search`
 - Quaerit communication is done through `GET` requests
 - Params:
