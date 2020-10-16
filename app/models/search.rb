@@ -21,29 +21,23 @@ class Search
 
     return params_error unless valid_search? # check search will be valid
 
-    params = { query: @query, offset: @offset, engines: @engines.to_s }
+    params = { query: @query, offset: @offset }
     results = []
 
     @engines.each do |engine|
-      results << case engine
-                 when 1
-                   search_google(params)
-                 when 2
-                   search_bing(params)
-                 else
-                   engine_error(engine)
-      end
+      results << (ENGINES.key?(engine) ? search_with_engine(engine, params) : engine_error(engine))
     end
 
     {
-      search: params,
+      search: params.merge({ engines: @engines.to_s }),
       results: results
     }
   end
 
-  def search_google(_params)
-    engine_results(1,
-                   [{ "title": 'cosa', "url": 'algo', "summary": 'stuff stuff' }])
+  def search_with_engine(engine, params)
+    engine = ENGINES[engine].new(params)
+
+    engine.search
   end
 
   def search_bing(_params)
@@ -71,7 +65,7 @@ class Search
   end
 
   def engine_results(engine, results)
-    { engine: "#{ENGINES[engine]} [#{engine}]", results: results }
+    { engine: "#{ENGINES[engine].name} [#{engine}]", results: results }
   end
 
   def engine_error(engine)
