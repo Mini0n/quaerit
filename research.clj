@@ -64,7 +64,10 @@ rails new . --api --skip-action-mailer --skip-action-mailbox --skip-active-recor
 
 -> Models & Controllers
 
-- engine: engine[]=1, engine[]=2, engine[]=1,2 | 1=google, 2=bing
+- engine: engine=1, engine=2, engine=1,2 | 1=google, 2=bing
 
+rails g scaffold Search engine:string query:string offset:integer --skip-template-engine
 
-rails g scaffold Search engine:integer query:string offset:integer --skip-template-engine
+-> URL request sample
+
+- http://127.0.0.1:3000/search?query=kabuto&offset=10&engines=1,2
