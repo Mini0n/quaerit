@@ -1,5 +1,5 @@
 ![screenshot](https://i.imgur.com/jau2zBS.png)
-# Quaerit
+# Quaerit 🔎 ➡️ 📃
 Search Google ||(&amp;&amp;) Bing: Get results in json format
 
 ### 📍 Description
