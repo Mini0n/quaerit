@@ -4,22 +4,15 @@ class SearchController < ApplicationController
   before_action :set_search, only: [:search]
 
   def search
-    # TODO: REMOVE THIS DEBUGING INFO OUTPUT
-
-    puts '-' * 43
-    puts @search.inspect
-    puts '-' * 43
-    #
-
     results = @search.search
 
     render json: results
   end
 
   def about
-    title = "<h2>Quaerit</h2>"
-    route = "- Search at: <a href=\"/search?query=kabuto&offset=10&engines=1,2\">/search</a>"
-    github = "- More info at: <a href=\"http://github.com/Mini0n/quaerit\" target=\"_blank\">Quaerit repo</a>"
+    title = '<h2>Quaerit</h2>'
+    route = '- Search at: <a href="/search?query=kabuto&offset=10&engines=1,2">/search</a>'
+    github = '- More info at: <a href="http://github.com/Mini0n/quaerit" target="_blank">Quaerit repo</a>'
 
     render html: "<pre>#{title}#{route}\n\n#{github}</pre>".html_safe
   end
