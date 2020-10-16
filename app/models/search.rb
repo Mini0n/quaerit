@@ -17,4 +17,9 @@ class Search
     "Searching with:\n #{self.inspect}"
   end
 
+  # get engine(s) as integers
+  def engines=(engines)
+    @engines = engines.scan(/\d+/).map(&:to_i)
+  end
+
 end
