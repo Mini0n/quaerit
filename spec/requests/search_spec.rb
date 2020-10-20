@@ -34,8 +34,8 @@ RSpec.describe '/search', type: :request do
 
       expect(response).to be_successful
       expect(results.size).to be 2
-      expect(results[0]['results'].size).to be 10
-      expect(results[1]['results'].size).to be 10
+      expect(results[0]['engine']).to include(GoogleSearchEngine.name)
+      expect(results[1]['engine']).to include(BingSearchEngine.name)
     end
 
     it 'renders an successful response' do
