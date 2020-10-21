@@ -2,7 +2,7 @@
 
 # Quaerit 🔎 ➡️ 📃
 
-Search Google ||(&amp;&amp;) Bing: Get results in json format
+Google + Bing searches to JSON
 
 ### 📍 Description
 
