@@ -16,7 +16,7 @@ class Search
   end
 
   def search
-    return params_error unless valid_search? # check search will be valid
+    return params_error if invalid_search? # check search will be valid
 
     params = { query: @query, offset: @offset }
     results = []
@@ -58,10 +58,8 @@ class Search
 
   private
 
-  def valid_search?
-    return false if @engines.empty? || @query.empty?
-
-    true
+  def invalid_search?
+    @engines.empty? || @query.empty?
   end
 
   def engine_results(engine, results)
