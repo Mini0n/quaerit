@@ -13,7 +13,7 @@ Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to se
   - `offset`(optional): search results offset (pagination) | default = 0
 
 - **examples**
-  - [?query=shoegazed&offset=10&engines=1](https://quaerit.herokuapp.com/search?query=shoegazed&offset=10&engines=1)
+  - [?query=shoegaze&offset=10&engines=1](https://quaerit.herokuapp.com/search?query=shoegaze&offset=10&engines=1)
   - [?query=giant squid&offset=10&engines=1](https://quaerit.herokuapp.com/search?query=giant+squid&offset=10&engines=2)
   - [?query=kabuto pokemon&offset=10&engines=1,2](https://quaerit.herokuapp.com/search?query=kabuto+pokemon&offset=10&engines=1,2)
 
@@ -23,7 +23,7 @@ Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to se
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Quaerit @ Heroku](https://quaerit.herokuapp.com/)
 
-### 💾 Run Local
+### 💻 Run Local
 
     git clone git@github.com:Mini0n/quaerit.git
     cd quaerit
@@ -33,7 +33,7 @@ Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to se
 ### 🐞 Run Tests
     rspec
 
-### ⚗️ Dependencies
+### 📦 Dependencies
 
 - Ruby  2.6.5
 - Rails 6.0.3
@@ -41,3 +41,12 @@ Quaerit (*He|She|It searches*) is a Ruby on Rails API application designed to se
   #### Ubuntu/Debian
 
 - `apt-get install build-essential patch ruby-dev zlib1g-dev liblzma-dev`
+
+
+### ⚗️ ToDo | Research
+
+- Serializing (select fields to return)?
+- Image searches?
+- Accept `POST`?
+- Search operators?
+- Wikipedia Engine?
