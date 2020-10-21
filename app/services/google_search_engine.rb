@@ -4,11 +4,6 @@ class GoogleSearchEngine < SearchEngine
   ENGINE_NAME = 'Google'
   BASE_URL = 'https://www.google.com/search?'
 
-  def initialize(params)
-    @query = params[:query]
-    @offset = params[:offset]
-  end
-
   def search
     response = self.class.get("#{BASE_URL}q=#{@query}&start=#{@offset}")
     html_res = Nokogiri::HTML(response.body)

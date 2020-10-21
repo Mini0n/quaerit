@@ -7,6 +7,11 @@
 class SearchEngine
   include HTTParty
 
+  def initialize(params)
+    @query = params[:query]
+    @offset = params[:offset]
+  end
+
   def search
     [{ "error": 'Engine search not implemented' }]
   end

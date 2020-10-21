@@ -5,11 +5,6 @@ class BingSearchEngine < SearchEngine
   BASE_URL = 'https://www.bing.com/search?'
   CHROME_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36'
 
-  def initialize(params)
-    @query = params[:query]
-    @offset = params[:offset]
-  end
-
   def search
     response = self.class.get("#{BASE_URL}q=#{@query}&first=#{@offset}", headers: { 'User-Agent' => CHROME_AGENT })
     html_res = Nokogiri::HTML(response.body)
