@@ -2,10 +2,21 @@
 
 require 'rails_helper'
 
+RSpec.shared_context 'SearchEngine shared context' do
+  let(:test_params_valid) { { query: 'ringo deathstarr', offset: 0 } }
+end
+
 RSpec.shared_examples 'a SearchEngine' do
+  include_context 'SearchEngine shared context'
+
+  subject { described_class.new(test_params_valid) }
+
   it 'respondes to default methods' do
+    expect(described_class).to respond_to(:new).with(1).argument
+
     expect(subject).to respond_to(:search).with(0).arguments
     expect(subject).to respond_to(:search_error).with(1).argument
+    expect(subject).to respond_to(:valid_url?).with(1).argument
   end
 
   describe '#search' do
@@ -24,6 +35,13 @@ RSpec.shared_examples 'a SearchEngine' do
       expect(result[:details]).to eq error
     end
   end
+end
+
+RSpec.describe SearchEngine do
+  it_behaves_like 'a SearchEngine'
+  include_context 'SearchEngine shared context'
+
+  subject { described_class.new(test_params_valid) }
 
   describe '#valid_url?' do
     it 'checks if an URL is valid' do
@@ -38,8 +56,4 @@ RSpec.shared_examples 'a SearchEngine' do
       expect(subject.valid_url?('')).to be false
     end
   end
-end
-
-RSpec.describe SearchEngine do
-  it_behaves_like 'a SearchEngine'
 end
