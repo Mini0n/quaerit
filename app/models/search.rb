@@ -9,10 +9,10 @@ class Search
 
   attr_accessor :engines, :query, :offset # our class attributes
 
-  def initialize(engines = [DEFAULT_ENGINE], query = '', offset = 0)
+  def initialize(engines: [DEFAULT_ENGINE], query: '', offset: 0)
     @engines = engines
-    @query = query
     @offset = offset
+    @query = query
   end
 
   def search
@@ -42,18 +42,18 @@ class Search
 
   # parse engines
   def engines=(engines)
-    @engines = engines.scan(/\d+/).map(&:to_i)
+    @engines = engines.to_s.scan(/\d+/).map(&:to_i)
     @engines = [DEFAULT_ENGINE] if @engines.empty? # use default engine if none
   end
 
   # parse query
   def query=(query)
-    @query = URI.encode(query)
+    @query = CGI.escape(query)
   end
 
   # parse offset
   def offset=(offset)
-    @offset = offset.scan(/\d+/).map(&:to_i).first || 0
+    @offset = offset.to_s.scan(/\d+/).map(&:to_i).first || 0
   end
 
   private
