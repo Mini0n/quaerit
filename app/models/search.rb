@@ -63,7 +63,7 @@ class Search
   end
 
   def engine_results(engine, results)
-    { engine: "#{ENGINES[engine].name} [#{engine}]", results: results }
+    { engine: ENGINES[engine].name.to_s, results: results }
   end
 
   def engine_error(engine)
