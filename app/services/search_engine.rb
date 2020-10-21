@@ -17,7 +17,7 @@ class SearchEngine
   end
 
   def self.name
-    'SearchEngine'
+    to_s
   end
 
   def search_error(error)

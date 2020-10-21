@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class GoogleSearchEngine < SearchEngine
-  ENGINE_NAME = 'Google'
   BASE_URL = 'https://www.google.com/search?'
 
   def search
@@ -11,10 +10,6 @@ class GoogleSearchEngine < SearchEngine
     parse_body(html_res)
   rescue StandardError => e
     search_error(e)
-  end
-
-  def self.name # Class method to get the engine name
-    ENGINE_NAME
   end
 
   private
