@@ -13,6 +13,7 @@ RSpec.shared_examples 'a SearchEngine' do
 
   it 'respondes to default methods' do
     expect(described_class).to respond_to(:new).with(1).argument
+    expect(described_class).to respond_to(:name).with(0).arguments
 
     expect(subject).to respond_to(:search).with(0).arguments
     expect(subject).to respond_to(:search_error).with(1).argument
