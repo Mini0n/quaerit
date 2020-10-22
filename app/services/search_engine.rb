@@ -22,7 +22,8 @@ class SearchEngine
 
   def search_error(error)
     { error: 'An error ocurred through the search process',
-      details: error }
+      detail: error,
+      caller: caller_locations(1, 1)[0].label }
   end
 
   def valid_url?(url)

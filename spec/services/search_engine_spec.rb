@@ -32,8 +32,8 @@ RSpec.shared_examples 'a SearchEngine' do
       result = subject.search_error(error)
 
       expect(result.class).to be Hash
-      expect(result.keys).to eq %i[error details]
-      expect(result[:details]).to eq error
+      expect(result.keys).to eq %i[error detail caller]
+      expect(result[:detail]).to eq error
     end
   end
 end
