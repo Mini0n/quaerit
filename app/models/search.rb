@@ -35,8 +35,8 @@ class Search
 
   def search_with_engine(engine, params)
     ENGINES[engine].new(params).search
-  rescue StandardError
-    []
+  rescue StandardError => e
+    [search_error(e.message)]
   end
 
   # === SETTERS === === === === === === === === === === === === === === === ===

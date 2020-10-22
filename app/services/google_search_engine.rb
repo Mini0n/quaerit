@@ -9,7 +9,7 @@ class GoogleSearchEngine < SearchEngine
 
     parse_body(html_res)
   rescue StandardError => e
-    search_error(e)
+    search_error(e.message)
   end
 
   private
@@ -22,6 +22,8 @@ class GoogleSearchEngine < SearchEngine
       parsed = parse_result(result)
       array << parsed unless parsed.empty?
     end
+  rescue StandardError => e
+    [search_error(e.message)]
   end
 
   def parse_result(result)
@@ -36,7 +38,7 @@ class GoogleSearchEngine < SearchEngine
       link: decoded,
       summary: result.children[1..-1].text
     }
-  rescue StandardError
-    {}
+  rescue StandardError => e
+    search_error(e.message)
   end
 end

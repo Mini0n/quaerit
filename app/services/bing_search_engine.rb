@@ -10,7 +10,7 @@ class BingSearchEngine < SearchEngine
 
     parse_body(html_res)
   rescue StandardError => e
-    search_error(e)
+    search_error(e.message)
   end
 
   private
@@ -22,6 +22,8 @@ class BingSearchEngine < SearchEngine
       parsed = parse_result(result)
       array << parsed unless parsed.empty?
     end
+  rescue StandardError => e
+    [search_error(e.message)]
   end
 
   def parse_result(result)
@@ -34,7 +36,7 @@ class BingSearchEngine < SearchEngine
       link: decoded,
       summary: result.children.last.children.last.text
     }
-  rescue StandardError
-    {}
+  rescue StandardError => e
+    search_error(e.message)
   end
 end
