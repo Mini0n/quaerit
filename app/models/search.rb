@@ -23,7 +23,8 @@ class Search
 
     @engines.each do |engine|
       results << (ENGINES.key?(engine) ?
-                  engine_results(engine, search_with_engine(engine, params)) : engine_error(engine))
+                  engine_results(engine, search_with_engine(engine, params)) :
+                  engine_error(engine))
     end
 
     {
@@ -33,37 +34,41 @@ class Search
   end
 
   def search_with_engine(engine, params)
-    engine = ENGINES[engine].new(params)
-
-    engine.search
+    ENGINES[engine].new(params).search
+  rescue StandardError
+    []
   end
 
   # === SETTERS === === === === === === === === === === === === === === === ===
 
   # parse engines
-  def engines=(engines)
-    @engines = engines.to_s.scan(/\d+/).map(&:to_i)
+  def engines=(engines_param)
+    @engines = extract_integers(engines_param)
     @engines = [DEFAULT_ENGINE] if @engines.empty? # use default engine if none
   end
 
   # parse query
-  def query=(query)
-    @query = CGI.escape(query)
+  def query=(query_param)
+    @query = CGI.escape(query_param)
   end
 
   # parse offset
-  def offset=(offset)
-    @offset = offset.to_s.scan(/\d+/).map(&:to_i).first || 0
+  def offset=(offset_param)
+    @offset = extract_integers(offset_param).first || 0
   end
 
   private
+
+  def extract_integers(param)
+    param.to_s.scan(/\d+/).map(&:to_i)
+  end
 
   def invalid_search?
     @engines.empty? || @query.empty?
   end
 
   def engine_results(engine, results)
-    { engine: ENGINES[engine].name.to_s, results: results }
+    { engine: ENGINES[engine].name, results: results }
   end
 
   def engine_error(engine)
