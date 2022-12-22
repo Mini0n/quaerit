@@ -38,7 +38,7 @@ Quaerit (_He|She|It searches_) is a Ruby on Rails API application designed to se
 
 ### 📦 Dependencies
 
-- Ruby 2.6.5
+- Ruby 3.0.3
 - Rails 6.0.3
 - multi_mxl
 - **Ubuntu/Debian**:
