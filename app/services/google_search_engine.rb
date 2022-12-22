@@ -15,8 +15,7 @@ class GoogleSearchEngine < SearchEngine
   private
 
   def parse_body(html_res)
-    results = html_res.search('#main').children.slice(3, 10) # 10 results
-    results = results.map { |result| result.children.first.children } # traverse results
+    results = html_res.css("div#main>div").select{ |el| el.css("h3").count == 1 }
 
     results.each.with_object([]) do |result, array|
       parsed = parse_result(result)
@@ -27,8 +26,8 @@ class GoogleSearchEngine < SearchEngine
   end
 
   def parse_result(result)
-    link = result.first.search('a')
-    decoded = URI.decode(link.first['href'][7..-1])
+    link = result.css('a')
+    decoded = link.first['href'][7..-1]
     decoded = decoded[0...decoded.index('&sa=')] # get result link
 
     return {} unless valid_url?(decoded)
@@ -36,7 +35,7 @@ class GoogleSearchEngine < SearchEngine
     {
       title: link.text,
       link: decoded,
-      summary: result.children[1..-1].text
+      summary: result.children.first.children.last.content
     }
   rescue StandardError => e
     search_error(e.message)
