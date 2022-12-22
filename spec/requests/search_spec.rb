@@ -45,7 +45,7 @@ RSpec.describe '/search', type: :request do
 
       expect(response).to be_successful
       expect(results.size).to be 1
-      expect(results.keys.first).to be 'error'
+      expect(results.keys.first).to eq 'error'
     end
   end
 

@@ -29,7 +29,7 @@ class SearchEngine
   def valid_url?(url)
     return false if url.empty?
 
-    uri = URI.parse(URI.escape(url))
+    uri = URI.parse(url)
 
     return false if uri.host.nil?
 

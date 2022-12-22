@@ -6,7 +6,7 @@ RSpec.describe Search do
   describe '#search' do
     it 'executes a search' do
       params = { engines: [1], query: 'search term', offset: 0 }
-      search = described_class.new(params)
+      search = described_class.new(**params)
       engine = GoogleSearchEngine.new(params)
       result = ['results']
 
